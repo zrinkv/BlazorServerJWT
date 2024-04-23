@@ -1,0 +1,17 @@
+﻿@page "/login"
+@attribute [AllowAnonymous]
+@using BlazorAuthorization.SharedServices
+@inject UserAuthenticationStateProvider UserAuthenticationStateProvider
+@inject NavigationManager navMan
+
+
+<h3>Login</h3>
+<button type="button" class="btn btn-success" @onclick="LoginAsync">Login</button>
+
+@code {
+    public async Task LoginAsync()
+    {
+        await UserAuthenticationStateProvider.LoginAsync("user", "pass123");
+        navMan.NavigateTo("/", true);
+    }
+}

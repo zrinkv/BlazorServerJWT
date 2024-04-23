@@ -1,0 +1,31 @@
+﻿@page "/"
+@using BlazorAuthorization.SharedServices
+@inject UserAuthenticationStateProvider UserAuthenticationStateProvider
+@inject NavigationManager navMan
+
+<div>Full name: @UserAuthenticationStateProvider.CurrentUser.FullName</div>
+<div>Name: @UserAuthenticationStateProvider.CurrentUser.Username</div>
+@* @attribute [Authorize] *@
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<AuthorizeView>
+    <Authorized>
+        This content is displayed only if the user is Authorized
+        <button type="button" class="btn btn-success" @onclick="LogoutAsync">Logout</button>
+    </Authorized>
+    <NotAuthorized>
+       <RedirectToLogin></RedirectToLogin>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    public async Task LogoutAsync()
+    {
+        await UserAuthenticationStateProvider.LogoutAsync();
+        navMan.NavigateTo("/", true);
+    }
+}

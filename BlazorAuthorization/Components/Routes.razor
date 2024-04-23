@@ -1,0 +1,17 @@
+﻿<Router AppAssembly="typeof(Program).Assembly">
+    <Found Context="routeData">
+        <AuthorizeRouteView RouteData="routeData" DefaultLayout="typeof(Layout.MainLayout)">           
+            <NotAuthorized>
+                <div>You are not authorized. router auth</div>                
+            </NotAuthorized>
+            <Authorizing>
+                <div>Authorizing...</div>
+            </Authorizing>       
+        </AuthorizeRouteView>
+    </Found>
+    <NotFound>        
+        <LayoutView Layout="typeof(Layout.MainLayout)">
+            <p>Sorry, there's nothing at this address.</p>
+        </LayoutView>       
+    </NotFound>
+</Router>
